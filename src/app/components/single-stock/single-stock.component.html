@@ -1,0 +1,74 @@
+<!-- <div class="container" *ngIf="data">
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{ data?.description }} ({{ data?.symbol }})
+          </h5>
+          <div class="d-flex">
+            <div
+              class="d-flex details"
+              *ngFor="let result of data?.details?.data"
+            >
+              <div>
+                <div class="card-text">{{ getMonth(result?.month) }}</div>
+                <div class="card-text">{{ result?.change }}</div>
+                <div class="card-text">{{ result?.mspr }}</div>
+              </div>
+              <div class="up-icon ms-3">
+                {{ positiveOrNegative(result?.change) === 1 ? "🡹" : "🡻" }}
+              </div>
+            </div>
+          </div>
+          <a id="backBtn" class="btn btn-primary btn-sm mt-3" routerLink="/"
+            >< Back to list of stocks</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container p-3" *ngIf="data">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <h5 class="card-title">
+            {{ data?.result?.result[0]?.description }} ({{ data?.result?.result[0]?.symbol }})
+          </h5>
+        <div class="card-body">
+          <div class="row">
+            <div
+              class="col-md-3 m-3"
+              *ngFor="let result of data?.details?.data"
+            >
+              <div class="d-flex">
+                <div>
+                  <div class="card-text">{{ getMonth(result?.month) }}</div>
+                  <div class="card-text">Change: {{ result?.change }}</div>
+                  <div class="card-text">MSPR: {{ result?.mspr }}</div>
+                </div>
+                <div
+                  class="text-success up-icon ms-3"
+                  *ngIf="positiveOrNegative(result?.change) === 1"
+                >
+                  {{ "🡹" }}
+                </div>
+                <div
+                  class="text-danger up-icon ms-3"
+                  *ngIf="positiveOrNegative(result.change) === -1"
+                >
+                  {{ "🡻" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a id="backBtn" class="btn btn-primary btn-sm mt-3" routerLink="/"
+            >< Back to list of stocks</a
+          >
+    </div>
+  </div>
+</div>

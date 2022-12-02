@@ -1,0 +1,50 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <p>Enter the symbol of a stock to track (i.e. AAPL, TSLA, GOOGL)</p>
+          <form class="d-flex" [formGroup]="stockForm">
+            <input
+              type="text"
+              id="stockInput"
+              class="form-control w-25"
+              formControlName="stockInput"
+            />
+            <button id="trackBtn" class="btn btn-dark ms-3" (click)="onTrack()">
+              Track Stock
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3" *ngFor="let data of stockDetails">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="text-end">
+            <button type="button" id="remove{{data.symbol}}" class="btn-close" aria-label="Close" (click)="removeStock(data.symbol)"></button>
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{ data.description }} ({{ data.symbol }})</h5>
+            <div class="d-flex justify-content-between">
+              <div>
+                <div class="d-flex">
+                  <span class="card-text">Change today: {{ data.d }}%</span>
+                  <span class="card-text ms-3">Opening price: {{ data.o }}</span>
+                </div>
+                <div class="d-flex mt-2">
+                  <span class="card-text">Current price: {{ data.c }}</span>
+                  <span class="card-text ms-3">High price: {{ data.h }}</span>
+                </div>
+              </div>
+              <div class="text-success up-icon" *ngIf="positiveOrNegative(data.d.toString()) === 1">{{'🡹'}}</div>
+              <div class="text-danger up-icon" *ngIf="positiveOrNegative(data.d.toString()) === -1">{{'🡻'}}</div>
+            </div>
+            <a id="sentiment{{data.symbol}}" class="btn btn-primary btn-sm mt-3"
+              [routerLink]="['/sentiment/', data.symbol]">Go to social sentiment details ></a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
